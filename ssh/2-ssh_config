@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Autenticate without passphrase
-Host 54.221.79.200
-User ubuntu
+Host 54.221.63.23
+user ubuntu
 IdentityFile ~/.ssh/school
 PreferredAuthentications publickey
 PasswordAuthentication no
