@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
-#the procedure for the redirrection
- sudo apt-get update 
-sudo apt-get install -y nginx
+# Configuring Nginx server so that /redirect_me is redirecting to another page.
 
-echo"Holberton school" sudo tee /var/www/html/index.html
+sudo apt-get -y update
+sudo apt-get -y install nginx
 
-string_for_replacement="server_name -;\n\trewrite ^\/\/github.com\/edith permanent;"
+echo "Holberton School" | sudo tee /var/www/html/index.html
 
-sudo sed -i "s/server_name -;$string_for_replacement/" /etc/nginx/sites-enabled/defaulr
+# Redirection configuration
+replacement="server_name _;\\
+    location /redirect_me {\\
+        return 301 https://github.com/Edith2323/;\\
+    }"
+sudo sed -i "s|server_name _;|$replacement|" /etc/nginx/sites-available/default
 
-sudo service nginx
+sudo nginx -t
+sudo service nginx restart
