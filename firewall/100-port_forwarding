@@ -1,0 +1,14 @@
+# /etc/ufw/before.rules
+*nat
+:PREROUTING ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+
+# Forward traffic from port 8080 to 80
+-A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 127.0.0.1:80
+-A POSTROUTING -p tcp -d 127.0.0.1 --dport 80 -j MASQUERADE
+
+COMMIT
+
+*filter
+# Existing rules for the filter table
+
